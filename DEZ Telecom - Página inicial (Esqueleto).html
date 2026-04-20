@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DEZ Telecom — Wireframe Página Inicial</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;background:#f4f4f2;color:#1a1a1a;font-size:14px;line-height:1.5}
+.tag{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:#999;margin-bottom:10px;display:block;font-weight:500}
+.ph{background:#e2e2de;display:flex;align-items:center;justify-content:center;color:#aaa;font-size:11px;font-family:monospace;text-align:center;padding:16px;width:100%;height:100%}
+.btn{display:inline-block;padding:11px 22px;border:1px solid #222;background:transparent;color:#222;font-size:12px;cursor:pointer;border-radius:2px;font-family:inherit;letter-spacing:.04em}
+.btn.filled{background:#1a1a1a;color:#fff;border-color:#1a1a1a}
+.section-label{font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:#c0c0bc;font-family:monospace;margin-bottom:32px;padding-bottom:10px;border-bottom:1px solid #e4e4e0}
+.sec{padding:72px 48px}
+.sec.alt{background:#eeecea}
+.sec.light{background:#f9f9f7}
+.inner{max-width:1100px;margin:0 auto}
+h1{font-size:clamp(28px,3.5vw,44px);font-weight:300;line-height:1.12;letter-spacing:-.03em;margin-bottom:18px}
+h2{font-size:clamp(20px,2.5vw,32px);font-weight:300;line-height:1.18;letter-spacing:-.025em;margin-bottom:14px}
+h3{font-size:15px;font-weight:500;margin-bottom:6px;letter-spacing:-.01em}
+p{color:#666;line-height:1.65;margin-bottom:14px;font-size:13px}
+
+/* NAV */
+nav{background:#fff;border-bottom:1px solid #e8e8e4;padding:0 48px;display:flex;align-items:center;height:60px;position:sticky;top:0;z-index:100}
+.nav-logo{font-size:15px;font-weight:700;color:#1a1a1a;letter-spacing:-.02em;margin-right:48px;white-space:nowrap;flex-shrink:0}
+.nav-links{display:flex;align-items:center;flex:1}
+.nav-links a{font-size:13px;color:#555;text-decoration:none;padding:0 16px;height:60px;display:flex;align-items:center;border-bottom:2px solid transparent;white-space:nowrap}
+.nav-links a:hover{color:#1a1a1a;border-bottom-color:#ccc}
+.nav-right{margin-left:auto;display:flex;gap:10px;align-items:center;flex-shrink:0}
+.nav-btn{font-size:12px;padding:8px 16px;border:1px solid #ddd;background:#fff;color:#333;border-radius:2px;cursor:pointer;font-family:inherit;white-space:nowrap}
+.nav-btn.dark{background:#1a1a1a;color:#fff;border-color:#1a1a1a}
+
+/* HERO CAROUSEL */
+.hero-wrap{background:#f0f0ee;padding:0 48px;overflow:hidden}
+.hero-track{max-width:1100px;margin:0 auto}
+.hero-slide{display:none;grid-template-columns:1fr 1fr;align-items:center;gap:64px;min-height:400px;padding:72px 0 48px}
+.hero-slide.active{display:grid}
+.hero-img-wrap{height:320px;border-radius:6px;overflow:hidden}
+.hero-dots-wrap{padding:0 48px 48px;max-width:1196px;margin:0 auto;display:flex;gap:6px}
+.dot{width:28px;height:2px;background:#ccc;border-radius:2px;cursor:pointer;transition:all .3s}
+.dot.on{background:#555;width:40px}
+
+/* PLANS */
+.plans-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:#ddd;border:1px solid #ddd;border-radius:8px;overflow:hidden;margin-top:28px}
+.plan-card{background:#fff;padding:28px 22px;display:flex;flex-direction:column}
+.plan-name{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#aaa;margin-bottom:6px;font-weight:500}
+.plan-speed{font-size:36px;font-weight:200;letter-spacing:-.04em;color:#1a1a1a;line-height:1}
+.plan-speed span{font-size:12px;color:#aaa;font-weight:400;letter-spacing:0}
+.plan-price{font-size:24px;font-weight:300;color:#1a1a1a;margin:14px 0 6px;letter-spacing:-.02em}
+.plan-price sup{font-size:11px;vertical-align:top;margin-top:6px;font-weight:400}
+.plan-price small{font-size:11px;color:#aaa;font-weight:400}
+.plan-divider{height:1px;background:#f0f0ee;margin:14px 0}
+.plan-feats{list-style:none;font-size:11px;color:#888;flex:1;line-height:2}
+.plan-feats li::before{content:"· ";color:#ccc}
+.plan-cta{margin-top:20px;width:100%;padding:10px 0;border:1px solid #ddd;background:#fff;color:#444;font-size:11px;border-radius:2px;cursor:pointer;font-family:inherit;letter-spacing:.04em}
+.plan-card.featured{background:#fafaf8}
+.plan-card.featured .plan-cta{background:#1a1a1a;color:#fff;border-color:#1a1a1a}
+
+/* CTA STRIP */
+.cta-strip{margin-top:32px;display:flex;align-items:center;justify-content:space-between;gap:24px;padding-top:28px;border-top:1px solid #e8e8e4;flex-wrap:wrap}
+.cta-strip p{margin:0;font-size:14px;color:#555;flex:1}
+.cta-strip .btn{flex-shrink:0}
+
+/* TWO-COL FREE */
+.two-col-free{display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:center}
+.two-col-free .img-free{border-radius:8px;overflow:hidden}
+.two-col-free .text-card{background:#fff;border:1px solid #e0e0dc;border-radius:8px;padding:48px 44px;display:flex;flex-direction:column;justify-content:center;height:100%}
+.feat-list{list-style:none;margin:16px 0 22px}
+.feat-list li{padding:10px 0;border-bottom:1px solid #f0f0ee;font-size:13px;color:#666;display:flex;gap:10px}
+.feat-list li::before{content:"—";color:#ccc;flex-shrink:0}
+
+/* BENTO */
+.bento{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:28px}
+.bc{background:#fff;border:1px solid #e0e0dc;border-radius:10px;overflow:hidden;display:flex;flex-direction:column}
+.bc.full{grid-column:1/-1}
+.bc.full .bc-inner{display:grid;grid-template-columns:1fr 1fr;min-height:280px}
+.bc.full .bc-inner .bc-img{overflow:hidden;min-height:280px}
+.bc.full .bc-inner .bc-img .ph{height:100%}
+.bc.full .bc-inner .bc-text{padding:44px 48px;display:flex;flex-direction:column;justify-content:center}
+.bc.full.rev .bc-inner .bc-img{border-radius:0 10px 10px 0}
+.bc.full.rev .bc-inner .bc-text{order:-1}
+.bc.half{min-height:420px}
+.bc.half .bc-img{overflow:hidden;flex:1}
+.bc.half .bc-img .ph{min-height:200px;border-radius:10px 10px 0 0}
+.bc.half .bc-text{padding:28px 28px 32px;display:flex;flex-direction:column}
+.bc.half .bc-text h3{font-size:15px;font-weight:500;margin-bottom:6px}
+.bc .bc-text h3{font-size:18px;font-weight:300;margin-bottom:8px;letter-spacing:-.02em}
+.bc .bc-text p{font-size:13px;color:#777;margin-bottom:18px}
+
+/* MULTICONNECT */
+.multi-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:#ddd;border:1px solid #ddd;border-radius:8px;overflow:hidden;margin-top:28px;width:100%}
+.mc{background:#fff;padding:40px 36px;display:flex;flex-direction:column}
+.mc.feat{background:#fafaf8}
+.mc-label{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#aaa;margin-bottom:8px;font-weight:500}
+.mc-speeds{display:flex;gap:24px;margin-bottom:20px;flex-wrap:wrap;align-items:stretch}
+.mc-speed-item{display:flex;flex-direction:column}
+.mc-speed-val{font-size:36px;font-weight:200;letter-spacing:-.04em;color:#1a1a1a;line-height:1}
+.mc-speed-val span{font-size:12px;color:#aaa;font-weight:400;letter-spacing:0}
+.mc-speed-desc{font-size:11px;color:#aaa;margin-top:4px}
+.mc-sep{width:1px;background:#f0f0ee;align-self:stretch}
+.mc-divider{height:1px;background:#f0f0ee;margin:20px 0}
+.mc-price{font-size:28px;font-weight:300;letter-spacing:-.02em;margin-bottom:4px}
+.mc-price sup{font-size:12px;vertical-align:top;margin-top:6px;font-weight:400}
+.mc-price small{font-size:12px;color:#aaa;font-weight:400}
+.mc-feats{list-style:none;font-size:11px;color:#888;margin:14px 0 20px;flex:1;line-height:2.1}
+.mc-feats li::before{content:"· ";color:#ccc}
+.mc-btn{width:100%;padding:11px 0;border:1px solid #ddd;background:#fff;color:#444;font-size:11px;border-radius:2px;cursor:pointer;font-family:inherit;letter-spacing:.04em;margin-top:auto}
+.mc.feat .mc-btn{background:#1a1a1a;color:#fff;border-color:#1a1a1a}
+
+/* REFER */
+.steps{list-style:none;margin:20px 0 28px;counter-reset:s}
+.steps li{counter-increment:s;display:flex;gap:16px;align-items:flex-start;padding:14px 0;border-bottom:1px solid #f0f0ee;font-size:13px;color:#666}
+.steps li::before{content:counter(s);width:28px;height:28px;border-radius:50%;background:#f0f0ee;display:flex;align-items:center;justify-content:center;font-size:11px;flex-shrink:0;color:#888}
+
+/* FOOTER */
+footer{background:#fff;border-top:1px solid #e8e8e4;padding:56px 48px 28px}
+.f-inner{max-width:1100px;margin:0 auto}
+.f-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1.4fr;gap:48px;margin-bottom:48px}
+.f-col h4{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:#888;margin-bottom:16px;font-weight:600}
+.f-col ul{list-style:none}
+.f-col ul li{font-size:12px;color:#aaa;padding:3px 0;line-height:1.7}
+.f-logo{font-size:17px;font-weight:700;color:#1a1a1a;letter-spacing:-.02em;margin-bottom:6px}
+.f-tagline{font-size:13px;color:#aaa;margin-bottom:18px}
+.socials{display:flex;gap:8px}
+.soc{width:32px;height:32px;border:1px solid #e8e8e4;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:9px;color:#aaa;font-family:monospace}
+.f-bottom{border-top:1px solid #f0f0ee;padding-top:20px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+.f-bottom p{font-size:11px;color:#ccc}
+.fab{position:fixed;bottom:28px;right:28px;width:48px;height:48px;background:#1a1a1a;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-size:16px;z-index:200;cursor:pointer}
+
+/* RESPONSIVE */
+@media(max-width:960px){
+  nav{padding:0 24px}
+  .nav-links a{padding:0 10px;font-size:12px}
+  .sec{padding:56px 24px}
+  .hero-wrap,.hero-dots-wrap{padding-left:24px;padding-right:24px}
+  .plans-grid{grid-template-columns:repeat(2,1fr)}
+  .two-col-free{grid-template-columns:1fr}
+  .two-col-free .text-card{height:auto}
+  .bc.full .bc-inner{grid-template-columns:1fr}
+  .bc.full .bc-inner .bc-img{min-height:200px}
+  .bc.full .bc-inner .bc-img .ph{border-radius:10px 10px 0 0 !important}
+  .bc.full.rev .bc-inner .bc-img{border-radius:10px 10px 0 0}
+  .bc.full.rev .bc-inner .bc-text{order:0}
+  .bento{grid-template-columns:1fr}
+  .bc.full{grid-column:1}
+  .f-grid{grid-template-columns:1fr 1fr}
+  footer{padding:48px 24px 24px}
+}
+@media(max-width:640px){
+  nav{padding:0 16px}
+  .nav-links{display:none}
+  .hero-slide{grid-template-columns:1fr}
+  .hero-img-wrap{height:180px}
+  .plans-grid{grid-template-columns:1fr}
+  .multi-grid{grid-template-columns:1fr}
+  .sec{padding:40px 16px}
+  .hero-wrap,.hero-dots-wrap{padding-left:16px;padding-right:16px}
+  .f-grid{grid-template-columns:1fr}
+  footer{padding:40px 16px 20px}
+  .cta-strip{flex-direction:column;align-items:flex-start}
+  .two-col-free .text-card{padding:32px 28px}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">DEZ Telecom</div>
+  <div class="nav-links">
+    <a href="#">Internet Fibra ▾</a>
+    <a href="#">Telefonia ▾</a>
+    <a href="#">TV por Assinatura</a>
+    <a href="#">Monitoramento</a>
+  </div>
+  <div class="nav-right">
+    <button class="nav-btn">Área do cliente</button>
+    <button class="nav-btn dark">0800 Atendimento</button>
+  </div>
+</nav>
+
+<!-- HERO CAROUSEL -->
+<div class="hero-wrap">
+  <div class="hero-track">
+
+    <div class="hero-slide active" id="slide-0">
+      <div>
+        <span class="tag">Ultravelocidade</span>
+        <h1>A potência máxima que sua conexão exige</h1>
+        <p style="font-size:14px;color:#777;margin-bottom:24px">Com o Combo Titanium de 1000 Mega, você navega, joga e trabalha sem delay com a melhor fibra da região.</p>
+        <button class="btn filled">Quero contratar!</button>
+      </div>
+      <div class="hero-img-wrap"><div class="ph" style="height:100%">[ Imagem: gamer / home office ]</div></div>
+    </div>
+
+    <div class="hero-slide" id="slide-1">
+      <div>
+        <span class="tag">Soluções corporativas</span>
+        <h1>Soluções inteligentes para o seu negócio decolar</h1>
+        <p style="font-size:14px;color:#777;margin-bottom:24px">Internet com link dedicado, telefonia fixa e atendimento premium para garantir sua produtividade.</p>
+        <button class="btn filled">Falar com especialista</button>
+      </div>
+      <div class="hero-img-wrap"><div class="ph" style="height:100%">[ Imagem: equipe em reunião / escritório moderno ]</div></div>
+    </div>
+
+    <div class="hero-slide" id="slide-2">
+      <div>
+        <span class="tag">Segurança 24h/7d</span>
+        <h1>Sua tranquilidade na palma da mão</h1>
+        <p style="font-size:14px;color:#777;margin-bottom:24px">Monitoramento avançado e tecnologia de ponta para proteger sua residência ou empresa.</p>
+        <button class="btn filled">Solicitar orçamento</button>
+      </div>
+      <div class="hero-img-wrap"><div class="ph" style="height:100%">[ Imagem: residência monitorada / app de segurança ]</div></div>
+    </div>
+
+  </div>
+</div>
+<div class="hero-dots-wrap">
+  <div class="dot on" onclick="goSlide(0)"></div>
+  <div class="dot" onclick="goSlide(1)"></div>
+  <div class="dot" onclick="goSlide(2)"></div>
+</div>
+
+<!-- PLANOS RESIDENCIAL -->
+<div class="sec light">
+  <div class="inner">
+    <div class="section-label">Seção — Internet fibra residencial</div>
+    <span class="tag">Internet fibra residencial</span>
+    <h2>Planos de internet que acompanham o seu ritmo</h2>
+    <div class="plans-grid">
+      <div class="plan-card">
+        <div class="plan-name">Combo Wood</div>
+        <div class="plan-speed">100<span> MEGA</span></div>
+        <div class="plan-price"><sup>R$</sup>69<small>,90/mês</small></div>
+        <div class="plan-divider"></div>
+        <ul class="plan-feats"><li>Instalação gratuita</li><li>Wi-Fi alto alcance</li><li>Skeelo</li><li>Super Conhecimento</li></ul>
+        <button class="plan-cta">Assinar agora</button>
+      </div>
+      <div class="plan-card">
+        <div class="plan-name">Combo Copper</div>
+        <div class="plan-speed">150<span> MEGA</span></div>
+        <div class="plan-price"><sup>R$</sup>79<small>,90/mês</small></div>
+        <div class="plan-divider"></div>
+        <ul class="plan-feats"><li>Instalação gratuita</li><li>Wi-Fi alto alcance</li><li>Skeelo</li><li>Super Conhecimento</li></ul>
+        <button class="plan-cta">Assinar agora</button>
+      </div>
+      <div class="plan-card">
+        <div class="plan-name">Combo Silver</div>
+        <div class="plan-speed">300<span> MEGA</span></div>
+        <div class="plan-price"><sup>R$</sup>89<small>,90/mês</small></div>
+        <div class="plan-divider"></div>
+        <ul class="plan-feats"><li>Instalação gratuita</li><li>Wi-Fi alto alcance</li><li>Skeelo</li><li>Super Conhecimento</li></ul>
+        <button class="plan-cta">Assinar agora</button>
+      </div>
+      <div class="plan-card featured">
+        <div class="plan-name">Combo Gold ★ Mais popular</div>
+        <div class="plan-speed">700<span> MEGA</span></div>
+        <div class="plan-price"><sup>R$</sup>99<small>,90/mês</small></div>
+        <div class="plan-divider"></div>
+        <ul class="plan-feats"><li>Instalação gratuita</li><li>Wi-Fi alto alcance</li><li>DEZ On TV</li><li>Watch BR Streaming</li><li>Skeelo</li><li>Super Conhecimento</li></ul>
+        <button class="plan-cta">Assinar agora</button>
+      </div>
+      <div class="plan-card">
+        <div class="plan-name">Combo Platinum</div>
+        <div class="plan-speed">800<span> MEGA</span></div>
+        <div class="plan-price"><sup>R$</sup>119<small>,90/mês</small></div>
+        <div class="plan-divider"></div>
+        <ul class="plan-feats"><li>Instalação gratuita</li><li>Wi-Fi alto alcance</li><li>DEZ On TV</li><li>Watch BR Streaming</li><li>Skeelo</li><li>Super Conhecimento</li></ul>
+        <button class="plan-cta">Assinar agora</button>
+      </div>
+      <div class="plan-card">
+        <div class="plan-name">Combo Titanium</div>
+        <div class="plan-speed">1000<span> MEGA</span></div>
+        <div class="plan-price"><sup>R$</sup>139<small>,90/mês</small></div>
+        <div class="plan-divider"></div>
+        <ul class="plan-feats"><li>Instalação gratuita</li><li>Wi-Fi alto alcance</li><li>DEZ On TV</li><li>Watch BR Streaming</li><li>Skeelo</li><li>Super Conhecimento</li></ul>
+        <button class="plan-cta">Assinar agora</button>
+      </div>
+    </div>
+    <div class="cta-strip">
+      <p>Encontre o plano ideal para a sua necessidade:</p>
+      <button class="btn filled">Quero saber mais</button>
+    </div>
+  </div>
+</div>
+
+<!-- EMPRESARIAL -->
+<div class="sec alt">
+  <div class="inner">
+    <div class="section-label">Seção — Internet fibra empresarial</div>
+    <div class="two-col-free">
+      <div class="text-card">
+        <span class="tag">DEZ Empresas</span>
+        <h2>Estabilidade e desempenho para empresas que não podem parar</h2>
+        <p>Planos com link dedicado, suporte especializado e tempo de atendimento reduzido para garantir a produtividade da sua empresa.</p>
+        <div><button class="btn filled">Ver planos</button></div>
+      </div>
+      <div class="img-free"><div class="ph" style="min-height:300px;border-radius:8px">[ Imagem: rede / escritório moderno ]</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- DEZ ON TV -->
+<div class="sec light">
+  <div class="inner">
+    <div class="section-label">Seção — DEZ On TV</div>
+    <div class="two-col-free">
+      <div class="img-free"><div class="ph" style="min-height:280px;border-radius:8px">[ Imagem: TV, canais, família ]</div></div>
+      <div class="text-card">
+        <span class="tag">Entretenimento garantido</span>
+        <h2>O melhor da TV ao vivo, onde você estiver</h2>
+        <p>Mais de 80 canais com variedades, notícias, esportes e filmes para toda a família.</p>
+        <div><button class="btn">Quero saber mais</button></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 5G -->
+<div class="sec alt">
+  <div class="inner">
+    <div class="section-label">Seção — Telefonia 5G</div>
+    <div class="two-col-free">
+      <div class="text-card">
+        <span class="tag">#ChamaNo5G</span>
+        <h2>Liberdade para estar sempre conectado</h2>
+        <p>WhatsApp ilimitado e planos de dados que não te deixam na mão. Ative seu chip e mantenha seu número.</p>
+        <ul class="feat-list">
+          <li>Zero Delay — latência ultra-baixa para jogos e videochamadas</li>
+          <li>Rede Inteligente — menos bateria, conexão máxima</li>
+          <li>WhatsApp ilimitado sem descontar da franquia</li>
+          <li>Roaming Nacional — sinal garantido em todo o país</li>
+        </ul>
+        <div><button class="btn filled">Ver planos móveis</button></div>
+      </div>
+      <div class="img-free"><div class="ph" style="min-height:300px;border-radius:8px">[ Imagem: jovem com smartphone ]</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- FIXA -->
+<div class="sec light">
+  <div class="inner">
+    <div class="section-label">Seção — Telefonia Fixa</div>
+    <div class="two-col-free">
+      <div class="img-free"><div class="ph" style="min-height:260px;border-radius:8px">[ Imagem: pessoa ao telefone ]</div></div>
+      <div class="text-card">
+        <span class="tag">Telefonia fixa</span>
+        <h2>Fale mais e pague menos com planos feitos para você</h2>
+        <p>Tarifas para ligações locais e longa distância com garantia de estabilidade máxima para suas conversas.</p>
+        <div><button class="btn">Quero saber mais</button></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- DEZ SEG -->
+<div class="sec alt">
+  <div class="inner">
+    <div class="section-label">Seção — DEZ Seg</div>
+    <div class="two-col-free">
+      <div class="text-card">
+        <span class="tag">Monitoramento inteligente</span>
+        <h2>Segurança de alta tecnologia para sua proteção</h2>
+        <p>Monitoramento por câmeras com acesso pelo smartphone, disponível 24h por dia.</p>
+        <ul class="feat-list">
+          <li>Acesso remoto às imagens pelo app DEZ Telecom</li>
+          <li>Armazenamento 100% na nuvem</li>
+          <li>Ideal para residências, comércios e condomínios</li>
+        </ul>
+        <div><button class="btn">Quero saber mais</button></div>
+      </div>
+      <div class="img-free"><div class="ph" style="min-height:300px;border-radius:8px">[ Imagem: câmeras, app monitoramento ]</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- BENEFÍCIOS BENTO -->
+<div class="sec light">
+  <div class="inner">
+    <div class="section-label">Seção — Serviços e benefícios</div>
+    <span class="tag">Serviços e benefícios</span>
+    <h2>Muito mais do que internet</h2>
+    <div class="bento">
+
+      <div class="bc full">
+        <div class="bc-inner">
+          <div class="bc-img"><div class="ph" style="height:100%;min-height:280px;border-radius:10px 0 0 10px">[ Imagem: família sofá, Watch BR ]</div></div>
+          <div class="bc-text">
+            <span class="tag">Filmes e séries</span>
+            <h3>O seu cinema particular dentro de casa</h3>
+            <p>Catálogo gigante com os maiores sucessos para maratonar em alta definição quando e onde quiser.</p>
+            <div><button class="btn">Quero saber mais</button></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="bc full rev">
+        <div class="bc-inner">
+          <div class="bc-text">
+            <span class="tag">Músicas sem parar</span>
+            <h3>+120 milhões de músicas sem anúncios e sem limites</h3>
+            <p>Playlists, novos artistas com o Flow e podcasts exclusivos com máxima qualidade de áudio.</p>
+            <div><button class="btn">Quero saber mais</button></div>
+          </div>
+          <div class="bc-img"><div class="ph" style="height:100%;min-height:280px;border-radius:0 10px 10px 0">[ Imagem: fones, Deezer ]</div></div>
+        </div>
+      </div>
+
+      <div class="bc half">
+        <div class="bc-img"><div class="ph" style="min-height:200px;border-radius:10px 10px 0 0">[ Imagem: cursos, Super Conhecimento ]</div></div>
+        <div class="bc-text">
+          <span class="tag">Evolução profissional</span>
+          <h3>+500 cursos com especialistas</h3>
+          <p>Cursos certificados para turbinar seu currículo em diversas áreas profissionais.</p>
+          <div><button class="btn" style="font-size:11px;padding:8px 16px">Quero saber mais</button></div>
+        </div>
+      </div>
+
+      <div class="bc half">
+        <div class="bc-img"><div class="ph" style="min-height:200px;border-radius:10px 10px 0 0">[ Imagem: revistas, BeBanca ]</div></div>
+        <div class="bc-text">
+          <span class="tag">Informação em tempo real</span>
+          <h3>Jornais, revistas, notícias e esportes</h3>
+          <p>Acesso ilimitado aos principais títulos do país: notícias, esportes, moda.</p>
+          <div><button class="btn" style="font-size:11px;padding:8px 16px">Quero saber mais</button></div>
+        </div>
+      </div>
+
+      <div class="bc full">
+        <div class="bc-inner">
+          <div class="bc-img"><div class="ph" style="height:100%;min-height:280px;border-radius:10px 0 0 10px">[ Imagem: leitura smartphone, Skeelo ]</div></div>
+          <div class="bc-text">
+            <span class="tag">Sua biblioteca digital</span>
+            <h3>Leve uma biblioteca inteira dentro do seu bolso</h3>
+            <p>Receba os livros mais vendidos do Brasil mensalmente e leia ou ouça onde quiser, mesmo sem internet.</p>
+            <div><button class="btn">Quero saber mais</button></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- MULTICONNECT -->
+<div class="sec alt">
+  <div class="inner">
+    <div class="section-label">Seção — MultiConnect</div>
+    <span class="tag">Super combos exclusivos</span>
+    <h2>MultiConnect: simplificando sua vida</h2>
+    <p>Combine Fibra + Móvel 5G e ganhe descontos e benefícios exclusivos.</p>
+    <div class="multi-grid">
+      <div class="mc">
+        <div class="mc-label">MultiConnect Basic</div>
+        <div class="mc-speeds">
+          <div class="mc-speed-item">
+            <div class="mc-speed-val">400<span> MEGA</span></div>
+            <div class="mc-speed-desc">Internet Fibra</div>
+          </div>
+          <div class="mc-sep"></div>
+          <div class="mc-speed-item">
+            <div class="mc-speed-val">8<span> GIGA</span></div>
+            <div class="mc-speed-desc">Móvel 5G</div>
+          </div>
+        </div>
+        <div class="mc-divider"></div>
+        <div class="mc-price"><sup>R$</sup>129<small>,90/mês</small></div>
+        <ul class="mc-feats">
+          <li>Instalação gratuita</li>
+          <li>Wi-Fi alto alcance</li>
+          <li>Skeelo</li>
+          <li>BeBanca</li>
+          <li>Super Conhecimento</li>
+        </ul>
+        <button class="mc-btn">Assinar agora</button>
+      </div>
+      <div class="mc feat">
+        <div class="mc-label">MultiConnect Gold ★ Recomendado</div>
+        <div class="mc-speeds">
+          <div class="mc-speed-item">
+            <div class="mc-speed-val">800<span> MEGA</span></div>
+            <div class="mc-speed-desc">Internet Fibra</div>
+          </div>
+          <div class="mc-sep"></div>
+          <div class="mc-speed-item">
+            <div class="mc-speed-val">16<span> GIGA</span></div>
+            <div class="mc-speed-desc">Móvel 5G</div>
+          </div>
+        </div>
+        <div class="mc-divider"></div>
+        <div class="mc-price"><sup>R$</sup>149<small>,90/mês</small></div>
+        <ul class="mc-feats">
+          <li>Instalação gratuita</li>
+          <li>Wi-Fi alto alcance</li>
+          <li>Skeelo</li>
+          <li>BeBanca</li>
+          <li>Super Conhecimento</li>
+        </ul>
+        <button class="mc-btn">Assinar agora</button>
+      </div>
+    </div>
+    <div class="cta-strip">
+      <p>Por que ter apenas um, se você pode ser Multi?</p>
+      <button class="btn">Quero saber mais</button>
+    </div>
+  </div>
+</div>
+
+<!-- INDIQUE -->
+<div class="sec light">
+  <div class="inner">
+    <div class="section-label">Seção — Indique um amigo</div>
+    <div class="two-col-free">
+      <div class="text-card">
+        <span class="tag">Indique e ganhe</span>
+        <h2>Indique a DEZ e ganhe descontos na fatura</h2>
+        <p>Conexão boa a gente compartilha com os amigos! Para cada indicação que realizar a instalação, você ganha um mês de internet grátis.</p>
+        <ol class="steps">
+          <li>Indique a DEZ Telecom para um amigo</li>
+          <li>Seu amigo contrata e recebe a instalação</li>
+          <li>Você ganha automaticamente uma mensalidade grátis</li>
+        </ol>
+        <button class="btn filled">Compartilhar agora</button>
+      </div>
+      <div class="img-free"><div class="ph" style="min-height:300px;border-radius:8px">[ Imagem: amigos com celulares ]</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="f-inner">
+    <div class="f-grid">
+      <div class="f-col">
+        <div class="f-logo">DEZ Telecom</div>
+        <div class="f-tagline">Sempre com você!</div>
+        <div class="socials">
+          <div class="soc">WA</div><div class="soc">IG</div><div class="soc">FB</div><div class="soc">LI</div>
+        </div>
+      </div>
+      <div class="f-col">
+        <h4>Institucional</h4>
+        <ul>
+          <li>Início</li><li>Quem somos</li><li>Trabalhe conosco</li><li>Webmail</li>
+          <li>Teste sua velocidade</li><li>Área do cliente</li><li>2ª via de boleto</li>
+          <li>Requisição de direitos do titular</li><li>Política de privacidade</li><li>Cookies</li>
+        </ul>
+      </div>
+      <div class="f-col">
+        <h4>Contatos</h4>
+        <ul><li>0800 — Atendimento geral</li><li>Suporte técnico</li><li>E-mail</li></ul>
+      </div>
+      <div class="f-col">
+        <h4>Unidades</h4>
+        <ul>
+          <li>Dois Vizinhos — R. Mal. Floriano Peixoto, 45</li>
+          <li>Francisco Beltrão — Av. A. de P. Cantelmo, 954</li>
+          <li>Cruzeiro do Iguaçu</li>
+          <li>Boa Esperança do Iguaçu</li>
+          <li>Quedas do Iguaçu / Espigão — R. Marfin, 955</li>
+          <li>Três Barras do Paraná — Av. Brasil, 221</li>
+          <li>Catanduvas — Av. Paraná, 378</li>
+        </ul>
+      </div>
+    </div>
+    <div class="f-bottom">
+      <p>© 2026 DEZ Telecom. CNPJ [a confirmar]. Todos os direitos reservados.</p>
+      <p>Desenvolvido por Fyre Design.</p>
+    </div>
+  </div>
+</footer>
+
+<div class="fab">💬</div>
+
+<script>
+var current = 0;
+var total = 3;
+var timer;
+
+function goSlide(n) {
+  document.getElementById('slide-' + current).classList.remove('active');
+  document.querySelectorAll('.dot')[current].classList.remove('on');
+  current = n;
+  document.getElementById('slide-' + current).classList.add('active');
+  document.querySelectorAll('.dot')[current].classList.add('on');
+  clearInterval(timer);
+  timer = setInterval(function(){ goSlide((current + 1) % total); }, 5000);
+}
+
+timer = setInterval(function(){ goSlide((current + 1) % total); }, 5000);
+</script>
+
+</body>
+</html>
